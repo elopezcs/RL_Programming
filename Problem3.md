@@ -112,8 +112,6 @@ Let $(|S|=25)$ and $(|A|=4)$.
 ## Full code
 
 ```
-
-```
 import csv
 import time
 import numpy as np
@@ -415,3 +413,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
