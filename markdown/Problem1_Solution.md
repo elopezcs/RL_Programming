@@ -26,6 +26,7 @@ A practical Markov state must include variables needed to predict the next state
 **Components:**
 - $(q_t \in \mathbb{R}^n)$: joint positions (angles).
 - $(\dot q_t \in \mathbb{R}^n)$: joint velocities.
+- $(p^{ee}_t \in \mathbb{R}^3)$: end-effector position (from forward kinematics on $(q_t)$).
 - $(p^{obj}_t \in \mathbb{R}^3)$: object position (or pose if needed).
 - $(\dot p^{obj}_t \in \mathbb{R}^3)$: object velocity (helps with slip/disturbances).
 - $(p^{goal} \in \mathbb{R}^3)$: target placement position (fixed per episode or randomized at reset).
@@ -58,6 +59,8 @@ The transition model captures:
 Formally:
 - $s_{t+1} \sim P(\cdot \mid s_t, a_t)$
 
+Each MDP step corresponds to applying $a_t$ for a fixed control interval $(\Delta t)$ and integrating the dynamics over that interval.
+
 In simulation, $P$ may be approximately deterministic. In real systems, it is effectively stochastic due to sensor noise and contact uncertainty.
 
 ---
@@ -87,6 +90,7 @@ This rewards consistent progress rather than simply being close.
 ### 5.3 Sparse event bonuses
 
 - Grasp bonus: $r^{grasp}_t = R_g \cdot \mathbb{1}[\text{grasp occurs at }t]$
+  - where $\mathbb{1}[\text{grasp occurs at }t] = \mathbb{1}[c_{t-1}=0\ \wedge\ c_t=1]$.
 - Success bonus (placed and released): $r^{succ}_t = R_s \cdot \mathbb{1}[\lVert p^{obj}_t - p^{goal}\rVert < \epsilon\ \text{and}\ c_t = 0]$
 
 Requiring release near the goal prevents a failure mode where the agent holds the object at the goal indefinitely.
@@ -94,7 +98,7 @@ Requiring release near the goal prevents a failure mode where the agent holds th
 ### 5.4 Smoothness and speed penalties
 
 - Effort penalty: $r^{eff}_t = -\lambda_\tau \lVert \tau_t \rVert^2$
-- Smoothness penalty: $r^{smooth}_t = -\lambda_{\Delta a}\lVert a_t - a_{t-1} \rVert^2$
+- Smoothness penalty: $r^{smooth}_t = -\lambda_{\Delta \tau}\lVert \tau_t - \tau_{t-1} \rVert^2$
 - Time penalty: $r^{time}_t = -c$
 
 ### 5.5 Full reward
@@ -120,7 +124,7 @@ Optional safety terminations:
 ## 7) Diagram (MDP and phase structure)
 
 ### 7.1 Agent-environment interaction
-![MAgent-environment interactionD](images/mdp1.png)
+![Agent-environment interaction](images/mdp1.png)
 
 
 ### 7.2 Phase structure (via grasp flag $c_t$)
