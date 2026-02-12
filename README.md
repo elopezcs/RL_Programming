@@ -8,7 +8,7 @@ The file `CSCN8020_Assignment1.pdf` contains the official problem statements.
 - `CSCN8020_Assignment1.pdf`  
   Assignment handout with all problem statements.
 
-- `markdown/`  
+- `solutions/`  
   Final, submission-ready writeups in Markdown:
   - `Problem_Solution.md` (overview or combined submission, if used)
   - `Problem1_Solution.md` (Pick-and-place robot MDP design)
@@ -42,12 +42,12 @@ Designs the task as an MDP by specifying:
 - Transition dynamics (simulated physics and stochasticity)
 - Reward design to encourage fast, smooth, and safe pick-and-place behavior
 
-See: `markdown/Problem1_Solution.md`
+See: `solutions/Problem1_Solution.md`
 
 ### Problem 2: 2x2 Gridworld (Value Iteration, 2 iterations)
 Performs two iterations of Value Iteration for a 2x2 gridworld with state-based rewards and wall-bounce transitions.
 
-See: `markdown/Problem2_Solution.md`
+See: `solutions/Problem2_Solution.md`
 
 ### Problem 3: 5x5 Gridworld (Value Iteration and in-place variation)
 Implements standard (synchronous) Value Iteration and in-place (Gauss-Seidel style) Value Iteration. Produces:
@@ -67,7 +67,7 @@ Implements off-policy Monte Carlo using a fixed behavior policy to generate epis
 
 See:
 - Code: `code/Problem4_Code.py`
-- Writeup: `markdown/Problem4_Solution.md`
+- Writeup: `solutions/Problem4_Solution.md`
 - Outputs: `logs/`, `images/`
 
 ## How to run the code locally
@@ -116,7 +116,7 @@ Expected outputs:
 
 ## Notes
 
-- The Markdown writeups in `markdown/` are intended to be the primary submission artifacts.
+- The Markdown writeups in `solutions/` are intended to be the primary submission artifacts.
 - The `logs/` and `images/` folders contain reproducible evidence of computation (tables, convergence curves, and debugging traces).
 - If you reorganize file paths, update image links inside the Markdown files accordingly.
 
